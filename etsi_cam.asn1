@@ -92,12 +92,12 @@ BEGIN
         curvatureCalculationMode CurvatureCalculationMode,
         yawRate YawRate,
         accelerationControl AccelerationControl OPTIONAL,
-        lanePosition LanePosition OPTIONAL,
+        --lanePosition LanePosition OPTIONAL, TODO
         steeringWheelAngle SteeringWheelAngle OPTIONAL,
         lateralAcceleration LateralAcceleration OPTIONAL,
         verticalAcceleration VerticalAcceleration OPTIONAL,
-        performanceClass PerformanceClass OPTIONAL,
-        cenDsrcTollingZone CenDsrcTollingZone OPTIONAL
+        performanceClass PerformanceClass OPTIONAL
+        --cenDsrcTollingZone CenDsrcTollingZone OPTIONAL TODO
     }
 
     BasicVehicleContainerLowFrequency ::= SEQUENCE {
@@ -144,7 +144,9 @@ BEGIN
     }
 
     RSUContainerHighFrequency ::= SEQUENCE {
-        protectedCommunicationZonesRSU ProtectedCommunicationZonesRSU OPTIONAL,
+        --protectedCommunicationZonesRSU ProtectedCommunicationZonesRSU OPTIONAL, TODO
+        protectedCommunicationZonesRSU NULL,
+
         ...
     }
 
