@@ -3,6 +3,10 @@ ASN1_DEFS = etsi_cam.asn1 etsi_894_2.asn1
 
 ASN1_OBJS=${ASN_MODULE_SOURCES:.c=.o}
 
+all:
+	make Makefile.am.sample
+	make cam_size
+
 cam_size: cam_size.o Makefile.am.Sample
 	clang -o cam_size cam_size.o $(ASN1_OBJS)
 
