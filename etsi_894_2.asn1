@@ -455,7 +455,7 @@ BEGIN
         withinZeroPointOneDegree(1),
         withinOneDegree(10),
         outOfRange(126),
-        unavailable(127)\
+        unavailable(127)
     } (1..127)
 
     LaneNumber ::= INTEGER {
