@@ -1,0 +1,85 @@
+QoE Data Frame 30 byte (incl. 4 crc)   IEEE 802.11  Section 8.2.3
+
+
+CAM Size 331 byte
+
+1609.2 Cert 74 byte
+
+CAM PDU Size  30 + 74 + 331 = 435 byte
+
+struct {
+    SignerInfo signer; 9 (for cached certificate)
+    ToBeSignedWSM unsigned_wsm; 1 + cam
+    Signature signature; 65 (for 32 byte curve)
+} SignedWSM; 75
+
+
+// SIGNERINFO
+
+struct {
+    SignerIdentifierType  type;
+    select (type) {
+    case certificate:
+        WAVECertificate   certificate;
+    case certificate_digest:
+        CertID8           digest;
+    case certificate_chain:
+        WAVECertificate   certificates<2^16-1>;
+    case self: ;
+    }
+} SignerInfo; 1 + 8 = 9
+
+enum {certificate(0), certificate_digest(1), certificate_chain (2),
+      self (3), (2^8-1)}  SignerIdentifierType; 1
+
+
+
+
+
+// SIGNEDMESSAGE
+
+struct {
+    MessageFlags         mf;                     4bit
+    opaqueExtLength      wsm_payload<2^16-1>;    CAM Message
+    if_flag_set (mf, use_generation_time) {
+        Time64            generation_time;
+    }
+    if_flag_set (mf, expires) {
+        Time64           expiry_time;
+    }
+    if_flag_set (mf, use_location) {
+        3DLocationAndConfidence transmission_location;
+    }
+} ToBeSignedWSM;
+
+flags  {fragment(0), use_generation_time(1), expires(2),
+           use_location(3)} MessageFlags;
+
+
+
+
+
+
+// SIGNATURE
+
+struct {
+    extern PKAlgorithm algorithm;
+    select(algorithm) {
+    case ecdsa_nistp224_with_sha224:
+    case ecdsa_nistp256_with_sha256:
+    case ecdsa_with_sha256:
+        ECDSASignature ecdsa_signature;
+    }
+} Signature; 64
+
+struct {
+    extern uint8 curve_order_octets;
+    opaque       r[curve_order_octets];
+    opaque       s[curve_order_octets];
+} ECDSASignature; 32 + 32 = 64
+
+curve_order_octets
+nistp224    28
+nistp256    32
+
+
