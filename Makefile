@@ -3,7 +3,7 @@ ASN1_DEFS = ITS_CAM_v1.3.2.asn
 ASN1_OBJS=${ASN_MODULE_SOURCES:.c=.o}
 
 all:
-	make Makefile.am.sample
+	make TARGET=cam_parser Makefile.am.sample
 	make cam_size
 
 cam_size: cam_size.o Makefile.am.Sample
