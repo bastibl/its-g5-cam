@@ -18,7 +18,11 @@ cam_size: cam_size.o Makefile.am.Sample
 cam_parser: Makefile.am.Sample
 	make -f Makefile.am.Sample TARGET=cam_parser
 
-.PHONY: parse_sampel
+.PHONY: parse_sample
 parse_sample: cam_parser
 	./cam_parser -iper ./sample_cam.uper
+
+.PHONY: parse_sample_xml
+parse_sample_xml: cam_parser
+	./cam_parser -o per -ixer ./sample_cam.xml | xxd
 
