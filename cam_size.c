@@ -42,7 +42,9 @@ int main(int ac, char **av) {
 
     // print structure
     asn_fprint(stdout, &asn_DEF_CAM, cam);
-    fprintf(stdout, "Total size: %zD bytes\n", erv.encoded);
+    int bytes = erv.encoded / 8;
+    bytes += !!(erv.encoded % 8);
+    fprintf(stdout, "Total size: %zD bits   %d bytes\n", erv.encoded, bytes);
 
     return 0;
 }
