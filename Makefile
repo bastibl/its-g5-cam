@@ -15,7 +15,10 @@ Makefile.am.sample: $(ASN1_DEFS)
 cam_size: cam_size.o Makefile.am.Sample
 	clang -o cam_size cam_size.o $(ASN1_OBJS)
 
-.PHONY: parse_sampe
+cam_parser: Makefile.am.Sample
+	make -f Makefile.am.Sample TARGET=cam_parser
+
+.PHONY: parse_sampel
 parse_sample: cam_parser
 	./cam_parser -iper ./sample_cam.uper
 
