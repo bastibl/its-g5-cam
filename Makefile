@@ -12,11 +12,11 @@ cam_size.o: cam_size.c
 Makefile.am.sample: $(ASN1_DEFS)
 	asn1c -gen-PER -pdu=CAM $(ASN1_DEFS)
 
-cam_size: cam_size.o Makefile.am.Sample
+cam_size: cam_size.o Makefile.am.sample
 	clang -o cam_size cam_size.o $(ASN1_OBJS)
 
-cam_parser: Makefile.am.Sample
-	make -f Makefile.am.Sample TARGET=cam_parser
+cam_parser: Makefile.am.sample
+	make -f Makefile.am.sample TARGET=cam_parser
 
 .PHONY: parse_sample
 parse_sample: cam_parser
